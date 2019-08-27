@@ -110,16 +110,17 @@ Keyword arguments:
 
         if self.pathwayid[3:] in GLOBAL_PATHWAY_IDS:
             stylesheet = kegg2cyjs.KEGG_GLOBAL_STYLE[0]["style"]
-        else:                                                                                                                                                                                                              stylesheet = kegg2cyjs.KEGG_STYLE[0]["style"]
-                                                                                                                                                                                                                       return [cyto.Cytoscape(
+        else:
+            stylesheet = kegg2cyjs.KEGG_STYLE[0]["style"]
+        
+        return [cyto.Cytoscape(
                     id='cytoscape',
                     style= {'width': str(self.width)+'px', 'height': str(self.height)+'px'},
-                    stylesheet=stylesheet,                                                                                                                                                                                         elements=elems['nodes'] + elems['edges'],
+                    stylesheet=stylesheet,
+                    elements=elems['nodes'] + elems['edges'],
                     layout={'name': 'preset'}),
-                dash_table.DataTable(
-                    id='cytoscape-node-table',
+                dash_table.DataTable(                                                                                                                                                                               id='cytoscape-node-table',
                     columns=[{"name": i, "id": i} for i in result.columns],
                     data=result.to_dict('records'))]
                     # columns=[{"name": i, "id": i} for i in node_table.columns],
                     # data=node_table.to_dict('records'))]
-                    
